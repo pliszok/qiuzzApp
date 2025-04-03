@@ -14,11 +14,11 @@ import java.util.List;
 public class QuestionController {
 
     @Autowired
-    private QuestionService questionService;
+    QuestionService questionService;
 
     @GetMapping("allQuestions")
     public List<Question> getAllQuestions(){
-        return questionService.getALlQuestions;
+        return questionService.getAllQuestions();
     }
 
 }
