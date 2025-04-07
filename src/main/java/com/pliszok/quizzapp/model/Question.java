@@ -1,4 +1,4 @@
-package com.pliszok.quizzapp;
+package com.pliszok.quizzapp.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
