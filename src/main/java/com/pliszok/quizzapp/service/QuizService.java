@@ -5,6 +5,7 @@ import com.pliszok.quizzapp.dao.QuizDao;
 import com.pliszok.quizzapp.model.Question;
 import com.pliszok.quizzapp.model.QuestionWrapper;
 import com.pliszok.quizzapp.model.Quiz;
+import com.pliszok.quizzapp.model.Response;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -47,5 +48,22 @@ public class QuizService {
         }
 
         return new ResponseEntity<>(questionsForUser, HttpStatus.OK);
+    }
+    @Transactional
+    public ResponseEntity<Integer> calculateResult (Integer id, List<Response> responses){
+
+        /*Quiz quiz = quizDao.findById(id).orElseThrow(() -> new RuntimeException("Quiz not found with id: " + id));*/
+
+        Quiz quiz = quizDao.findById(id).get();
+
+        List<Question> questions = quiz.getQuestions();
+        int right = 0;
+        int i = 0;
+        for (Response response : responses){
+            if(response.getAnswer().equals(questions.get(i).getRightAnswer()))
+            right++;
+            i++;
+        }
+        return new ResponseEntity<>(right, HttpStatus.OK);
     }
 }

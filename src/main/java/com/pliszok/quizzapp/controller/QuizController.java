@@ -2,6 +2,7 @@ package com.pliszok.quizzapp.controller;
 
 import com.pliszok.quizzapp.model.QuestionWrapper;
 import com.pliszok.quizzapp.service.QuizService;
+import com.pliszok.quizzapp.model.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,5 +24,10 @@ public class QuizController {
     @GetMapping("get/{id}")
     public ResponseEntity<List<QuestionWrapper>> getQuizQuestions(@PathVariable Integer id){
         return quizService.getQuizQuestions(id);
+    }
+
+    @PostMapping("submit/{id}")
+        public ResponseEntity<Integer> submitQuiz(@PathVariable Integer id, @RequestBody List<Response> responses){
+        return quizService.calculateResult(id, responses);
     }
 }
