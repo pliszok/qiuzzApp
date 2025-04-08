@@ -14,17 +14,17 @@ public class Quiz {
     private Integer id;
     private String title;
 
-    @ManyToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Question> questions;
 
     public List<Question> getQuestions() {
         return questions;
     }
-
+/*
     public Integer getId() {
         return id;
     }
-
+*/
     public void setTitle(String title) {
         this.title = title;
     }

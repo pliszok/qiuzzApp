@@ -1,10 +1,8 @@
 package com.pliszok.quizzapp.controller;
 
-import com.pliszok.quizzapp.model.Question;
 import com.pliszok.quizzapp.model.QuestionWrapper;
 import com.pliszok.quizzapp.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
