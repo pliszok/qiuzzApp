@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Quiz</title>
+</head>
+<body>
+<h1>Start Quiz</h1>
+<input type="number" id="quizId" placeholder="Enter Quiz ID">
+<button onclick="loadQuiz()">Start</button>
+
+<div id="quizContainer"></div>
+
+<script>
+        function loadQuiz() {
+            const id = document.getElementById('quizId').value;
+
+            fetch(`/quiz/get/${id}`)
+                .then(response => response.json())
+                .then(questions => {
+                    const container = document.getElementById('quizContainer');
+                    container.innerHTML = '';
+
+                    questions.forEach((q, index) => {
+                        const div = document.createElement('div');
+                        div.innerHTML = `
+                            <p><strong>Q${index + 1}:</strong> ${q.questionTitle}</p>
+                            <label><input type="radio" name="q${q.id}" value="${q.option1}"> ${q.option1}</label><br>
+                            <label><input type="radio" name="q${q.id}" value="${q.option2}"> ${q.option2}</label><br>
+                            <label><input type="radio" name="q${q.id}" value="${q.option3}"> ${q.option3}</label><br>
+                            <label><input type="radio" name="q${q.id}" value="${q.option4}"> ${q.option4}</label><br><br>
+                        `;
+                        container.appendChild(div);
+                    });
+                })
+                .catch(err => alert("Quiz not found or error loading quiz."));
+        }
+    </script>
+</body>
+</html>
